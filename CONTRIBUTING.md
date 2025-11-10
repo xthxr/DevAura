@@ -139,7 +139,7 @@ refactor: optimize DAI calculation
 
 - [ ] Real LeetCode API integration
 - [ ] Real Stack Exchange API integration
-- [ ] OpenAI API integration for code analysis
+- [ ] Google Gemini API integration for code analysis
 - [ ] Enhanced error handling
 - [ ] Unit tests
 - [ ] E2E tests

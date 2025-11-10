@@ -190,7 +190,7 @@ DevAura/
 ### Phase 2 (Integrations)
 - [ ] Real LeetCode API
 - [ ] Real Stack Exchange API
-- [ ] OpenAI code analysis
+- [ ] Google Gemini code analysis
 - [ ] GitHub contribution calendar
 - [ ] Activity timeline
 

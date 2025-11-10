@@ -316,7 +316,7 @@ See [DEPLOYMENT.md](./DEPLOYMENT.md) for complete guide.
 ### Next Release (1.1.0)
 - [ ] Real LeetCode API
 - [ ] Real Stack Exchange API
-- [ ] OpenAI code analysis
+- [ ] Google Gemini code analysis
 - [ ] User profiles
 - [ ] Achievement badges
 

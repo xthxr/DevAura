@@ -268,7 +268,7 @@ See `DEPLOYMENT.md` for complete deployment guide.
 
 - [ ] Real LeetCode API integration
 - [ ] Real Stack Exchange API integration
-- [ ] OpenAI API for code quality analysis
+- [ ] Google Gemini API for code quality analysis
 - [ ] GitHub contribution calendar
 - [ ] Activity timeline
 - [ ] User profile customization

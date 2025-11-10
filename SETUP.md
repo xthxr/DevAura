@@ -193,7 +193,7 @@ For 10,000 monthly active users:
 
 ## Next Steps
 
-- [ ] Add OpenAI API for real AI evaluation
+- [ ] Add Google Gemini API for real AI evaluation
 - [ ] Integrate real LeetCode API
 - [ ] Integrate Stack Exchange API
 - [ ] Add user profile customization

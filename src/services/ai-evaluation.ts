@@ -50,17 +50,14 @@ export async function evaluateProjectQuality(
 }
 
 /**
- * Future implementation with OpenAI API
- * Uncomment when OpenAI API key is configured
+ * Future implementation with Google Gemini API
+ * Uncomment when GEMINI_API_KEY is configured
  */
 /*
-import OpenAI from 'openai'
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY
+const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent'
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-})
-
-export async function evaluateProjectQualityWithAI(
+export async function evaluateProjectQualityWithGemini(
   githubUsername: string,
   repoData: any[]
 ): Promise<AIEvaluation> {
@@ -75,12 +72,33 @@ Repos: ${JSON.stringify(repoData.slice(0, 5))}
 
 Respond in JSON format: { "projectOriginality": number, "documentationQuality": number, "codeQuality": number, "innovationScore": number }`
 
-  const response = await openai.chat.completions.create({
-    model: 'gpt-4-turbo-preview',
-    messages: [{ role: 'user', content: prompt }],
-    response_format: { type: 'json_object' },
+  const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      contents: [{
+        parts: [{
+          text: prompt
+        }]
+      }],
+      generationConfig: {
+        temperature: 0.4,
+        topK: 32,
+        topP: 1,
+        maxOutputTokens: 512,
+      }
+    })
   })
 
-  return JSON.parse(response.choices[0].message.content || '{}')
+  const data = await response.json()
+  const text = data.candidates[0]?.content?.parts[0]?.text || '{}'
+  
+  // Extract JSON from response (Gemini might wrap it in markdown)
+  const jsonMatch = text.match(/\{[\s\S]*\}/)
+  const jsonStr = jsonMatch ? jsonMatch[0] : text
+  
+  return JSON.parse(jsonStr)
 }
 */

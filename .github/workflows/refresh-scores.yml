@@ -1,8 +1,8 @@
 name: Refresh DAI Scores
 on:
   schedule:
-    # Runs every 3 hours
-    - cron: '0 */3 * * *'
+    # Runs daily at midnight UTC (compatible with Vercel Hobby plan)
+    - cron: '0 0 * * *'
   workflow_dispatch:
 
 jobs:

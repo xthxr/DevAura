@@ -37,7 +37,12 @@ CRON_SECRET
 
 ### Cron Jobs
 
-The cron job is configured in `vercel.json` to run every 3 hours.
+The cron job is configured in `vercel.json` to run daily at midnight UTC (compatible with Vercel Hobby/free plan).
+
+**Note:** Vercel's Hobby plan only supports daily cron jobs. To run more frequently (e.g., every 3 hours):
+- Upgrade to Vercel Pro plan ($20/month)
+- Or use GitHub Actions (see `.github/workflows/refresh-scores.yml`)
+- Or use an external cron service like [cron-job.org](https://cron-job.org)
 
 To secure it, add CRON_SECRET to environment variables.
 

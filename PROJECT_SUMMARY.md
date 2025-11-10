@@ -11,7 +11,7 @@
 - ✅ **Real-time DAI Calculation** - Advanced scoring algorithm
 - ✅ **Global Leaderboard** - Rank against developers worldwide
 - ✅ **Interactive Dashboard** - Personalized stats and visualizations
-- ✅ **Auto-refresh System** - Scores update every 3 hours
+- ✅ **Auto-refresh System** - Scores update daily (Vercel Hobby plan compatible)
 - ✅ **Redis Caching** - Lightning-fast performance
 
 ### Technical Highlights
@@ -69,7 +69,7 @@ Components:
 - **Database:** PlanetScale or Neon
 - **Cache:** Vercel KV
 - **CDN:** Vercel Edge
-- **Cron Jobs:** Vercel Cron (3-hour intervals)
+- **Cron Jobs:** Vercel Cron (daily at midnight UTC, Hobby plan compatible)
 
 ## 📁 Project Structure
 

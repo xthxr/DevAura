@@ -250,7 +250,7 @@ See `DEPLOYMENT.md` for complete deployment guide.
 ✅ Global leaderboard  
 ✅ Responsive radar charts  
 ✅ Animated badges & UI  
-✅ Auto-refresh every 3 hours  
+✅ Auto-refresh daily (Vercel Hobby plan compatible)  
 ✅ Edge-optimized deployment  
 ✅ TypeScript throughout  
 ✅ Mobile responsive  

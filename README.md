@@ -32,7 +32,7 @@ DevAura analyzes your coding activity across multiple platforms and generates a 
 - 📊 **Advanced DAI Calculation** - Multi-factor scoring algorithm
 - 🏆 **Global Leaderboard** - Compete with developers worldwide
 - 📈 **Interactive Dashboard** - Beautiful charts and visualizations
-- 🔄 **Auto-refresh** - Scores update every 3 hours automatically
+- 🔄 **Auto-refresh** - Scores update daily automatically (Vercel Hobby plan compatible)
 - ⚡ **Lightning Fast** - Redis caching + Edge deployment
 
 ### Technical Excellence

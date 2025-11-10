@@ -79,13 +79,19 @@ export async function GET(request: NextRequest) {
       projectOriginality: aiEvaluation.projectOriginality,
       documentationQuality: aiEvaluation.documentationQuality,
       lastCalculated: new Date(),
-      calculationCount: { increment: 1 },
     }
 
     await prisma.developerScore.upsert({
       where: { userId },
-      create: { userId, ...scoreData },
-      update: scoreData,
+      create: { 
+        userId, 
+        ...scoreData,
+        calculationCount: 1,
+      },
+      update: {
+        ...scoreData,
+        calculationCount: { increment: 1 },
+      },
     })
 
     // Update rankings (simple approach - in production, use a more efficient method)

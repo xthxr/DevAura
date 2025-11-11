@@ -24,9 +24,22 @@ export const authOptions: NextAuthOptions = {
       }
       return session
     },
+    async signIn({ user, account, profile }) {
+      // Allow sign in
+      console.log('Sign in callback:', { user: user.email, provider: account?.provider })
+      return true
+    },
+    async redirect({ url, baseUrl }) {
+      // Always redirect to dashboard after sign in
+      console.log('Redirect callback:', { url, baseUrl })
+      if (url.startsWith('/')) return `${baseUrl}${url}`
+      if (url.startsWith(baseUrl)) return url
+      return `${baseUrl}/dashboard`
+    },
   },
   pages: {
     signIn: '/login',
+    error: '/login', // Redirect errors to login page
   },
   session: {
     strategy: 'database',

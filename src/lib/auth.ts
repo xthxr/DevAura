@@ -65,17 +65,11 @@ export const authOptions: NextAuthOptions = {
     async signIn({ user, account, profile }) {
       if (account?.provider === 'github' && profile) {
         try {
-          // Use upsert to handle both new and existing users
-          await prisma.user.upsert({
-            where: { id: user.id },
-            update: {
-              githubUsername: (profile as any).login,
-            },
-            create: {
-              id: user.id,
-              email: user.email!,
-              name: user.name,
-              image: user.image,
+          // The Prisma adapter creates the user, so we just update the username
+          // Use a simple update since the user will already exist
+          await prisma.user.update({
+            where: { email: user.email! },
+            data: {
               githubUsername: (profile as any).login,
             },
           })

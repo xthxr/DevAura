@@ -64,13 +64,25 @@ export const authOptions: NextAuthOptions = {
     },
     async signIn({ user, account, profile }) {
       if (account?.provider === 'github' && profile) {
-        // Update GitHub username
-        await prisma.user.update({
-          where: { id: user.id },
-          data: {
-            githubUsername: (profile as any).login,
-          },
-        })
+        try {
+          // Use upsert to handle both new and existing users
+          await prisma.user.upsert({
+            where: { id: user.id },
+            update: {
+              githubUsername: (profile as any).login,
+            },
+            create: {
+              id: user.id,
+              email: user.email!,
+              name: user.name,
+              image: user.image,
+              githubUsername: (profile as any).login,
+            },
+          })
+        } catch (error) {
+          console.error('Error updating GitHub username:', error)
+          // Still allow sign-in even if update fails
+        }
       }
       return true
     },

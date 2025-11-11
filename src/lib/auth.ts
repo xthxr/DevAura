@@ -63,22 +63,33 @@ export const authOptions: NextAuthOptions = {
       return session
     },
     async signIn({ user, account, profile }) {
-      if (account?.provider === 'github' && profile) {
-        try {
-          // The Prisma adapter creates the user, so we just update the username
-          // Use a simple update since the user will already exist
+      try {
+        console.log('SignIn callback triggered:', { 
+          userId: user.id, 
+          email: user.email,
+          provider: account?.provider 
+        })
+        
+        if (account?.provider === 'github' && profile) {
+          // Wait a bit for the user to be created by the adapter
+          await new Promise(resolve => setTimeout(resolve, 100))
+          
+          // Update GitHub username
           await prisma.user.update({
             where: { email: user.email! },
             data: {
               githubUsername: (profile as any).login,
             },
+          }).catch(err => {
+            console.error('Error updating GitHub username:', err)
           })
-        } catch (error) {
-          console.error('Error updating GitHub username:', error)
-          // Still allow sign-in even if update fails
         }
+        
+        return true
+      } catch (error) {
+        console.error('SignIn callback error:', error)
+        return true // Allow sign-in even if update fails
       }
-      return true
     },
   },
   pages: {

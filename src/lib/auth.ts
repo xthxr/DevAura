@@ -11,10 +11,12 @@ export const authOptions: NextAuthOptions = {
     GithubProvider({
       clientId: process.env.GITHUB_ID!,
       clientSecret: process.env.GITHUB_SECRET!,
+      allowDangerousEmailAccountLinking: true,
     }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      allowDangerousEmailAccountLinking: true,
     }),
   ],
   callbacks: {
@@ -22,27 +24,25 @@ export const authOptions: NextAuthOptions = {
       if (session.user) {
         session.user.id = user.id
       }
+      console.log('Session callback:', { sessionUser: session.user?.email, userId: user?.id })
       return session
     },
     async signIn({ user, account, profile }) {
-      // Allow sign in
-      console.log('Sign in callback:', { user: user.email, provider: account?.provider })
+      console.log('Sign in attempt:', { 
+        email: user.email, 
+        provider: account?.provider,
+        userId: user.id 
+      })
       return true
-    },
-    async redirect({ url, baseUrl }) {
-      // Always redirect to dashboard after sign in
-      console.log('Redirect callback:', { url, baseUrl })
-      if (url.startsWith('/')) return `${baseUrl}${url}`
-      if (url.startsWith(baseUrl)) return url
-      return `${baseUrl}/dashboard`
     },
   },
   pages: {
     signIn: '/login',
-    error: '/login', // Redirect errors to login page
+    error: '/login',
   },
   session: {
     strategy: 'database',
+    maxAge: 30 * 24 * 60 * 60, // 30 days
   },
-  debug: true, // Enable debug mode
+  debug: true,
 }
